@@ -1,0 +1,145 @@
+"use client"
+import { useState } from 'react';
+import ButtonLoader from '@/components/ButtonLoader';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+
+const SignUp = () => {
+    const [loading,setLoading] = useState(false);
+    const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async () => {
+    if(!formData.email || !formData.password  || !formData.name) {
+        return
+    }
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Signup failed');
+      }
+
+      const data = await response.json();
+      console.log('Signup successful:', data);
+      toast.success('Sign up successfull')
+      router.push('/')
+      setFormData({ name: '', email: '', password: '' });
+    } catch (err) {
+        toast.error('user already exists')
+      console.error('Signup error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Create your account
+        </h2>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md ">
+        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-300">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                Name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder='Utkarsh Patel'
+                  required
+                  className=" text-black block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm  sm:text-sm"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email address
+              </label>
+              <div className="mt-1">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder='uydl.utkarsh@gmail.com'
+                  required
+                  className=" text-black block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm  sm:text-sm"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <div className="mt-1">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
+                  required
+                  placeholder='*******'
+                  className=" text-black block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm  sm:text-sm"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div>
+            <button
+                onClick={handleSubmit}
+                type="submit"
+                disabled = {loading}
+                className="w-full font-bold flex  justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm  text-white bg-black disabled:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              >
+                sign up
+                {
+                    loading  && <ButtonLoader/>
+
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUp;
