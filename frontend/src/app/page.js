@@ -10,7 +10,7 @@ export default function Home() {
   const [feedData,setFeedData] = useState([]);
 
   async function fetchData() {
-    const response = await fetch('http://127.0.0.1:8000/api/fetchFeed', {
+    const response = await fetch('https://assignmentbackend-19zx.onrender.com/api/fetchFeed', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

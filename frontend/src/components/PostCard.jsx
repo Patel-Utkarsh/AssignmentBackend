@@ -52,7 +52,7 @@ function PostCard({
   
 }) {
   async function likeHandler() {
-    const response = await fetch("http://127.0.0.1:8000/api/likePost", {
+    const response = await fetch("https://assignmentbackend-19zx.onrender.com/api/likePost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function PostCard({
 
     setLoading(true);
 
-    const response = await fetch("http://127.0.0.1:8000/api/commentPost", {
+    const response = await fetch("https://assignmentbackend-19zx.onrender.com/api/commentPost", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +176,6 @@ function PostCard({
                     <p className="font-bold">{comments?.author?.name}</p>
                     <p>{comments?.comment}</p>
                 </div>
-                {/* {JSON.stringify(comments)} */}
 
             </div>
         }
