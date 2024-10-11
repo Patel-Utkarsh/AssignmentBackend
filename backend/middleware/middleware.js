@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
 
 exports.middleware = async (req, res, next) => {
     try {
-        const token = req.cookies.vercel-feature-flags ||req.cookies.tokenCookie ;
+        const token = req.cookies.tokenCookie ;
+        console.log(token)
 
         // Check if token is present
         if (!token) {
@@ -12,9 +12,7 @@ exports.middleware = async (req, res, next) => {
             });
         }
 
-        
-        const decoded = jwt.verify(token, 'abc');
-        req.user_id = decoded.id; 
+    
 
         next();  // Proceed to the next middleware
 

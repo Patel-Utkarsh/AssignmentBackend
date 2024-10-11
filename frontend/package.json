@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "concurrently": "^9.0.1",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "next": "14.2.15",
     "react": "^18",

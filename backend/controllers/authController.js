@@ -27,18 +27,16 @@ exports.signUp = async (req, res) => {
       expiresIn: "1h",
     });
     const options = {
-      domain: '.vercel.app',  // Change this to the desired domain
 
-      expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour expiry
-      httpOnly: true, 
-      sameSite: 'None',
-      secure: true, 
+      expires: new Date(Date.now() + 1000 * 60 * 60), 
+     
     };
 
-    res.cookie("tokenCookie", token, options).status(200).json({
-      success: 'true',
-      message: 'logged in Successfully',
+    res.status(200).json({
+      success : true,
+      message : 'sign up successful',
       token,
+      options
 
   })
 
@@ -68,23 +66,17 @@ exports.login = async (req, res) => {
 
       const token = jwt.sign({ id: user._id }, 'abc', { expiresIn: '1h' });
 
-      // Set cookie options
       const options = {
-          expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour expiry
-          httpOnly: true, // Prevent client-side JavaScript access
-          sameSite: 'Lax', // Prevents CSRF
-          secure: false, // Set to true if running on HTTPS in production
-          path: '/', // Make the cookie accessible site-wide
-      };
+          expires: new Date(Date.now() + 1000 * 60 * 60),
+       } 
 
-      // Set the cookie and respond
-      res.cookie('tokenCookie', token, options).status(200).json({
-        domain: 'axz.onrender.com',
+     res.status(200).json({
+      success : true,
+      message : "login successful",
+      token,
+      options
 
-          success: true,
-          message: 'Logged in successfully',
-          token,
-      });
+     })
 
   } catch (error) {
       console.error(error);

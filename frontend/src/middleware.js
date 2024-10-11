@@ -10,7 +10,8 @@ export  default async  function middleware(req) {
     const isProtectedRoute = protectedRoutes.includes(path);
     const isPublicRoute = publicRoutes.includes(path);
 
-    const cookie = cookies().get('vercel-feature-flags')?.value || cookies().get('tokenCookie')?.value;
+    const cookie = cookies().get('tokenCookie')?.value;
+    console.log('cookie is ',cookie);
 
 
 

@@ -3,6 +3,8 @@ import { useState } from 'react';
 import ButtonLoader from '@/components/ButtonLoader';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
 
 const SignUp = () => {
     const [loading,setLoading] = useState(false);
@@ -44,6 +46,11 @@ const SignUp = () => {
       const data = await response.json();
       console.log('Signup successful:', data);
       toast.success('Sign up successfull')
+      Cookies.set('tokenCookie', data.token, {
+        expires : 1/24,
+        path : '/'
+        
+      });
       router.push('/')
       setFormData({ name: '', email: '', password: '' });
     } catch (err) {

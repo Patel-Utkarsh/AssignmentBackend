@@ -3,6 +3,7 @@ import ButtonLoader from '@/components/ButtonLoader';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const router = useRouter();
@@ -27,7 +28,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://assignmentbackend-19zx.onrender.com/api/auth/login', {
+      const response = await fetch('https://assignment-backend-cyan.vercel.app/api/auth/login', {
 
         method: 'POST',
         credentials : 'include',
@@ -38,12 +39,17 @@ const Login = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Signup failed');
+        throw new Error('login failed');
       }
 
       const data = await response.json();
 
       toast.success('Login Successfull')
+      Cookies.set('tokenCookie', data.token, {
+        expires : 1/24,
+        path : '/'
+        
+      });
       router.push('/');
 
       setFormData({ email: '', password: '' });
