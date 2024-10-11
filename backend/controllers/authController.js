@@ -27,8 +27,11 @@ exports.signUp = async (req, res) => {
       expiresIn: "1h",
     });
     const options = {
-      expires: new Date(Date.now() + 1000 * 60 * 60),
-  }
+      expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour expiry
+      httpOnly: true, 
+      sameSite: 'None',
+      secure: true, 
+    };
 
     res.cookie("tokenCookie", token, options).status(200).json({
       success: 'true',
@@ -63,8 +66,11 @@ exports.login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, 'abc', { expiresIn: '1h' });
 
         const options = {
-          expires: new Date(Date.now() + 1000 * 60 * 60),
-      }
+          expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour expiry
+          httpOnly: true, 
+          sameSite: 'None',
+          secure: true, 
+        };
 
         res.cookie("tokenCookie", token, options).status(200).json({
           success: 'true',
