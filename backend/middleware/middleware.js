@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 exports.middleware = async (req, res, next) => {
     try {
-        const token = req.cookies.tokenCookie;
+        const token = req.cookies.vercel-feature-flags;
 
         // Check if token is present
         if (!token) {
