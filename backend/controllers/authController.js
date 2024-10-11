@@ -27,6 +27,8 @@ exports.signUp = async (req, res) => {
       expiresIn: "1h",
     });
     const options = {
+      domain: 'https://assignment-backend-cyan.vercel.app', // Change this to the desired domain
+
       expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour expiry
       httpOnly: true, 
       sameSite: 'None',
