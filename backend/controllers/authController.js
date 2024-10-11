@@ -68,12 +68,8 @@ exports.login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, 'abc', { expiresIn: '1h' });
 
         const options = {
-          domain: '.vercel.app',  // Change this to the desired domain
 
           expires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour expiry
-          httpOnly: true, 
-          sameSite: 'None',
-          secure: true, 
         };
 
         res.cookie("tokenCookie", token, options).status(200).json({
