@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 exports.dbConnect = () => {
-    mongoose.connect('mongodb://127.0.0.1:27017/BackendAssignment',{
+    mongoose.connect('mongodb+srv://utkarshp04:ySRIE8PyN4xskPII@cluster0.nuzes1o.mongodb.net/assignment_backend',{
         useNewUrlParser : true,
         useUnifiedTopology : true
     })
