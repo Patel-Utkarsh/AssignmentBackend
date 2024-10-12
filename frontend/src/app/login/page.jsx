@@ -47,7 +47,8 @@ const Login = () => {
       toast.success('Login Successfull')
       Cookies.set('tokenCookie', data.token, {
         expires : 1/24,
-        path : '/'
+        path : '/',
+        sameSite : 'none'
         
       });
       router.push('/');
