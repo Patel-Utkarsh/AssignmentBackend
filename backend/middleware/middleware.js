@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 exports.middleware = async (req, res, next) => {
     try {
+        console.log('cookies ',req.cookies);
         const token = req.cookies.tokenCookie ;
         console.log(token)
 
