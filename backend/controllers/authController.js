@@ -31,6 +31,7 @@ exports.signUp = async (req, res) => {
       expires: new Date(Date.now() + 1000 * 60 * 60), 
      
     };
+    res.cookie('tokenCookie',token,options);
 
     res.status(200).json({
       success : true,
@@ -69,6 +70,9 @@ exports.login = async (req, res) => {
       const options = {
           expires: new Date(Date.now() + 1000 * 60 * 60),
        } 
+
+       res.cookie('tokenCookie',token,options);
+
 
      res.status(200).json({
       success : true,

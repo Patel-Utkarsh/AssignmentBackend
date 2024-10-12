@@ -28,7 +28,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://assignment-backend-cyan.vercel.app/api/auth/login', {
+      const response = await fetch('https://assignmentbackend-19zx.onrender.com/api/auth/login', {
 
         method: 'POST',
         credentials : 'include',
