@@ -32,6 +32,8 @@ exports.signUp = async (req, res) => {
      
     };
 
+    res.cookie("tokenCookie",options);
+
     res.status(200).json({
       success : true,
       message : 'sign up successful',
@@ -69,6 +71,7 @@ exports.login = async (req, res) => {
       const options = {
           expires: new Date(Date.now() + 1000 * 60 * 60),
        } 
+       res.cookie("tokenCookie",options);
 
 
 
