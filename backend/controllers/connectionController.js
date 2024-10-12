@@ -72,6 +72,9 @@ exports.addConnection = async(req,res) => {
     const {profile_id} = req.body;
     const {user_id} = req;
 
+    console.log(user_id.id);
+
+
     try {
         let user = await userModel.findByIdAndUpdate(user_id,{$pull : {pending_friend_requests : profile_id}});
         user.friends.push(profile_id);

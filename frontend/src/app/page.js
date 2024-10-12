@@ -19,7 +19,9 @@ export default function Home() {
   
     });
 
+
     const data = await response.json();
+    console.log(data)
     setFeedData(data.posts)
     setUserId(data.user_id);
 
@@ -42,7 +44,7 @@ export default function Home() {
             <div key={ind}>
             <PostCard 
             title = {element.title}
-            author = {element.author.name}
+            author = {element?.author?.name}
             likes = {element.likes}
             total_comments= {element.totalComments}
             createdAt = {element.createdAt}

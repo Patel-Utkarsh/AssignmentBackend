@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 
 exports.middleware = async (req, res, next) => {
     try {
@@ -13,8 +14,9 @@ exports.middleware = async (req, res, next) => {
         }
 
     
-
-        next();  // Proceed to the next middleware
+        const idObj = jwt.verify(token,"abc");
+        req.user_id = idObj.id;
+         next();  // Proceed to the next middleware
 
     } catch (error) {
         return res.status(401).json({

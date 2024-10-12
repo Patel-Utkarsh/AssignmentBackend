@@ -7,7 +7,6 @@ exports.fetchFeed = async (req, res) => {
   try {
     const user = await userModel.findById(user_id).populate("friends");
 
-    const friendsID = user.friends.map((friend) => friend._id);
 
     const posts = await post
       .find()
