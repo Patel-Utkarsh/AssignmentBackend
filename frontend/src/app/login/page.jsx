@@ -49,7 +49,6 @@ const Login = () => {
         expires: 1/24,
         path: '/',
         secure: true,
-        sameSite: 'none',
         httpOnly: true
         
       });
