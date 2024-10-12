@@ -21,6 +21,7 @@ app.use(function (req, res, next) {
 	cors({
         origin: ["https://assignment-backend-cyan.vercel.app", "http://127.0.0.1:3000", "http://localhost:3000"],
 		credentials:true,
+        origin : true
 	})
 )
 
